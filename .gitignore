@@ -18,7 +18,6 @@ selenium-debug.log
 *.tar
 *.bk
 dist/
-test/
 MINE.md
 UUU/
 zip/
