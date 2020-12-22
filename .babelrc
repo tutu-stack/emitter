@@ -1,0 +1,20 @@
+{
+	"presets": [
+		[
+			"@babel/preset-env", {
+				"modules": false,
+				"targets": {
+					"edge": "11",
+					"firefox": "40",
+					"chrome": "60",
+					"safari": "10.1"
+				}
+			}
+		]
+	],
+	"env": {
+		"test": {
+			"plugins": ["istanbul"]
+		}
+	}
+}
