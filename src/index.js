@@ -36,7 +36,11 @@ Emitter.prototype.off = function (name, fn) {
 	return false
 }
 
-Emitter.prototype.emit = function (name, context) {
+Emitter.prototype.empty = function () {
+	this.table = Object.create(null)
+}
+
+Emitter.prototype.emit = function (name, context, ...args) {
 	if (!name) { return }
 
 	const { table } = this
@@ -49,7 +53,7 @@ Emitter.prototype.emit = function (name, context) {
 		const len = fns.length
 		for (let i = 0; i < len; i++) {
 			const fn = fns[i]
-			fn.call(context)
+			fn.apply(context, args)
 		}
 	}
 }
