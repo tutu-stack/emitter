@@ -18,6 +18,23 @@ Emitter.prototype.on = function (name, fn) {
 	return this
 }
 
+Emitter.prototype.once = function (name, fn) {
+	const self = this
+	const { table } = this
+	if (!table[name]) {
+		table[name] = []
+	}
+
+	function onceFunc (...args) {
+		self.off(name, onceFunc)
+		fn.apply(this, args)
+	}
+
+	table[name].push(onceFunc)
+
+	return this
+}
+
 Emitter.prototype.off = function (name, fn) {
 	const { table } = this
 	const targetQueue = table[name]
@@ -36,7 +53,7 @@ Emitter.prototype.off = function (name, fn) {
 	return false
 }
 
-Emitter.prototype.empty = function () {
+Emitter.prototype.clear = function () {
 	this.table = Object.create(null)
 }
 

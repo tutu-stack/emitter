@@ -10,6 +10,23 @@ describe('emitter', () => {
 		e.emit('start', { name: 'test' })
 	})
 
+	it('Handles emit once', () => {
+		const e = new Emitter()
+		let count = 1
+		const handle1 = function (data) {
+			if (count > 1) {
+				throw new Error('Should not have run')
+			}
+			expect(data).equal(1)
+			count++
+		}
+		e.once('start', handle1)
+		e.emit('start', null, 1)
+		e.emit('start', null, 1)
+		e.emit('start', null, 1)
+		expect(count).equal(2)
+	})
+
 	it('Allows multiple handlers', () => {
 		const e = Emitter()
 		let count = 0
