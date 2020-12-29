@@ -75,8 +75,8 @@ Emitter.prototype.emit = function (name, context, ...args) {
 	}
 }
 
-Emitter.prototype.abort = function () {
-	// this._abort = true
-}
+// Emitter.prototype.abort = function () {
+// 	this._abort = true
+// }
 
 export default Emitter

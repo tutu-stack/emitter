@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = function (config) {
 	const configuration = {
 		basePath: './test/',
@@ -14,6 +16,11 @@ module.exports = function (config) {
 			'**/*.spec.js': ['webpack', 'sourcemap']
 		},
 		webpack: {
+			resolve: {
+				alias: {
+					src: path.resolve(process.cwd(), 'src')
+				}
+			},
 			module: {
 				rules: [
 					{
