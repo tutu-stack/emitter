@@ -3,11 +3,12 @@ import replace from 'rollup-plugin-replace'
 import sourcemaps from 'rollup-plugin-sourcemaps'
 import resolve from 'rollup-plugin-node-resolve'
 import alias from 'rollup-plugin-alias'
-import { uglify } from 'rollup-plugin-uglify'
+// import { uglify } from 'rollup-plugin-uglify'
 import notify from 'rollup-plugin-notify'
 import browsersync from 'rollup-plugin-browsersync'
 import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
+import typescript from 'rollup-plugin-typescript2'
 
 import pkg from './package.json'
 
@@ -56,6 +57,10 @@ plugins.push(alias({
 	'@': path.join(__dirname, 'src')
 }))
 
+plugins.push(typescript({
+	typescript: require('typescript')
+}))
+
 plugins.push(
 	replace({
 		__VERSION__: pkg.version
@@ -65,27 +70,7 @@ plugins.push(babel({
 	babelrc: true,
 	exclude: 'node_modules/**'
 }))
-// plugins.push(
-// 	babel({
-// 		babelrc: false,
-// 		// exclude: 'node_modules/**',
-// 		// runtimeHelpers: true,
-// 		presets: [
-// 			[
-// 				'@babel/preset-env', {
-// 					modules: false,
-// 					targets: {
-// 						edge: '11',
-// 						firefox: '40',
-// 						chrome: '60',
-// 						safari: '10.1'
-// 					}
-// 				}
-// 			]
-// 		]
 
-// 	})
-// )
 if (process.env.NODE_ENV != 'production') {
 	plugins.push(
 		browsersync({
@@ -95,7 +80,7 @@ if (process.env.NODE_ENV != 'production') {
 	)
 	plugins.push(notify())
 } else {
-	plugins.push(uglify())
+	// plugins.push(uglify())
 	plugins.push(terser())
 }
 

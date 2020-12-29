@@ -1,4 +1,3 @@
-
 function Emitter () {
 	if (!(this instanceof Emitter)) {
 		return new Emitter()
@@ -75,8 +74,8 @@ Emitter.prototype.emit = function (name, context, ...args) {
 	}
 }
 
-// Emitter.prototype.abort = function () {
+Emitter.prototype.abort = function () {
 // 	this._abort = true
-// }
+}
 
 export default Emitter
